@@ -48,7 +48,7 @@ public class BankService {
 
     public ResponseEntity<String> deposit(int id,int amount,int pin){
         Customer c=repo.getReferenceById(id);
-        if(amount>0 && c.getAccount().deposit(pin,amount) && c.isLogin()){
+        if(amount>0 && c.getAccount().deposit(pin,amount)  && c.isLogin()){
             repo.save(c);
             return new ResponseEntity<>("Deposited Successfully",HttpStatus.OK);
         }
