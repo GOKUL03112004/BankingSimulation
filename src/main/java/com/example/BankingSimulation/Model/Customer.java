@@ -11,7 +11,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
+
 public class Customer {
     public Customer() {
     }
@@ -19,17 +19,16 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    private String username;
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id",referencedColumnName = "id")
     private Account account;
-    private boolean isLogin=false;
 
-    public Customer(String name, String password,  float balance,int pin){
-        this.name=name;
+    public Customer(String username, String password, float balance, int pin){
+        this.username = username;
         this.password=password;
-        this.account= new Account(name,balance,pin);
+        this.account= new Account(username,balance,pin);
     }
     public Account getAccount() {
         return account;
@@ -47,20 +46,12 @@ public class Customer {
         this.id = id;
     }
 
-    public boolean isLogin() {
-        return isLogin;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(boolean login) {
-        isLogin = login;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

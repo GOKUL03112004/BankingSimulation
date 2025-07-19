@@ -5,14 +5,21 @@ import com.example.BankingSimulation.Model.Customer;
 import com.example.BankingSimulation.Service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/bank")
-public class BankController {
+public class  BankController {
 
     @Autowired
     private BankService service;
+
+    @GetMapping()
+    public String display(){
+        return "Hello World";
+    }
 
     @PostMapping("/new")
     public ResponseEntity<String> newCustomers(@RequestParam String name,
@@ -29,23 +36,30 @@ public class BankController {
         return service.login(name,password,id);
     }
 
-    @PostMapping("/{id}/deposit")
-    public ResponseEntity<String> deposit(@PathVariable int id,
+    @PostMapping("/deposit")
+    public ResponseEntity<String> deposit(
                           @RequestParam int amount,
                           @RequestParam int pin){
-        return service.deposit(id,amount,pin);
+        return service.deposit(amount,pin);
     }
 
-    @PostMapping("/{id}/withdraw")
-    public ResponseEntity<String> withDraw(@PathVariable int id,
+    @PostMapping("/withdraw")
+    public ResponseEntity<String> withDraw(
                            @RequestParam int amount,
                            @RequestParam int pin){
-        return service.withDraw(id,amount,pin);
+        return service.withDraw(amount,pin);
     }
 
-    @GetMapping("/{id}/balance")
-    public ResponseEntity<String> balance(@PathVariable int id){
-        return service.checkBalance(id);
+    @GetMapping("/balance")
+    public ResponseEntity<String> balance(){
+        return service.checkBalance();
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getUserProfile() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        return ResponseEntity.ok("Logged in as: " + username);
     }
 
 }
