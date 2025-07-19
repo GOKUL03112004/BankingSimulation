@@ -27,25 +27,6 @@ A secure, RESTful banking system built using **Spring Boot**, **Spring Security*
 
 ---
 
-## 📁 Project Structure
-BankingSimulation/
-├── src/
-│ ├── main/
-│ │ ├── java/
-│ │ │ └── com/bankingsim/
-│ │ │ ├── config/ # Security configuration
-│ │ │ ├── controller/ # REST API controllers
-│ │ │ ├── model/ # Entity classes
-│ │ │ ├── repository/ # Spring Data Repositories
-│ │ │ ├── service/ # Business logic
-│ │ │ └── BankingSimApplication.java
-│ │ └── resources/
-│ │ ├── application.properties
-└── pom.xml
-
-
----
-
 ## 🔐 Authentication Flow
 
 1. **Register** a new user via `/bank/new`
